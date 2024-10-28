@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="container">
-            <form action="">
+            <form action="https://jsonplaceholder.typicode.com/posts" method="post" id="formulario" novalidate>
                 <div class="row mt-3">
                     <div class="col-6">
                         <label for="inputUsuario" class="form-label">Usuario</label>
@@ -25,28 +25,33 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <label for="inputEmail" class="form-label">Correo electronico</label>
+                        <label for="inputEmail" class="form-label">Correo electr&oacute;nico</label>
                         <input type="email" class="form-control" id="inputEmail">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <label for="inputContrasena" class="form-label">Contrasena</label>
+                        <label for="inputContrasena" class="form-label">Contrase&ntilde;a</label>
                         <input type="password" class="form-control" id="inputContrasena">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <label for="inputRepContrasena" class="form-label">Repetir contrasena</label>
+                        <label for="inputRepContrasena" class="form-label">Repetir contrase&ntilde;a</label>
                         <input type="password" class="form-control" id="inputRepContrasena">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-6"><button type="submit" class="btn btn-primary">Enviar</button></div>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <p id="alerta"></p>
+                    </div>
+                </div>
             </form>
         </div>
-        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="Ejercicio7.js"></script>
     </body>
 </html>
