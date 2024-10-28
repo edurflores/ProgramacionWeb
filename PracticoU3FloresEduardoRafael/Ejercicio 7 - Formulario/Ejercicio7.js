@@ -1,20 +1,21 @@
-let alerta = document.getElementById('alerta');
+let botonEnviar = document.getElementById("botonEnviar");
+botonEnviar.addEventListener("click",envioDatos);
 
-let formulario = document.getElementById('formulario');
-formulario.addEventListener('submit',validacion);
-
-function muestraAviso(mensaje){
+function muestraAviso(mensaje,color){
+    let alerta = document.getElementById("alerta");
     alerta.textContent = mensaje;
-    alerta.style.color = "red";
+    alerta.style.color = color;
 }
 
+// Inciso 1
+
 function validacion(e){
+    console.log('Entro a validacion');
     e.preventDefault();
 
     let bandera = true; // bandera logica que indica si las condiciones se cumplieron
 
     alerta.textContent = '';
-
 
     let valorUsuario = document.getElementById('inputUsuario').value;
     
@@ -51,6 +52,28 @@ function validacion(e){
     if(bandera == false){
         return false;
     }else{
-        this.submit();
+        envioDatos();
+    }
+}
+
+// Inciso 2 
+
+async function envioDatos(ev){
+    ev.preventDefault();
+    let formulario = document.getElementById('formulario');
+    let datos = new FormData(formulario);
+
+    try{
+        let respuesta = await fetch(formulario.action, {
+            method: formulario.method,
+            body: datos
+            });
+        if(respuesta.ok) {
+            let resultado = await response.json();
+            console.log(resultado);
+            }
+        }
+    finally{
+        muestraAviso("Los datos se enviaron exitosamente.","green");
     }
 }
