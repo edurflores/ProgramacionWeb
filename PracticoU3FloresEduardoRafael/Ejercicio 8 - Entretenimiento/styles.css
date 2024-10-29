@@ -16,30 +16,49 @@ body{
     border: 2px solid blue;
 }
 
+.cuadroJug1 {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
 .tablero {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Ver si es necesario */
     border: 2px solid green;
     margin: 30px;
     height: 640px;
     width: 480px;
 }
 
+.panelAvisos {
+    border: 2px solid brown;
+    border-radius: 5px;
+    margin-top: 10px;
+    height: 100px;
+    width: 400px;
+}
+
 .fila {
     display: flex;
     flex-direction: row;
-    border: 2px solid yellow;
 
 }
 
+.filaBotones {
+    margin-top: 10px;
+}
+
 .caja{
-    border: 2px solid red; 
+    border: 2px solid #98c9f4; 
+    background-color: #eef8ff;
     height: 150px;
     width: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: 32px;
 }
 
