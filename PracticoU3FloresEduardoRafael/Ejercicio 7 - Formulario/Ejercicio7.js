@@ -16,7 +16,9 @@ botonEnviar.addEventListener('click',(event) => {
         cuadroAlertas.appendChild(nuevaAlerta);
     }
 
-    if(!(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(inputCorreo.value))){
+    let ERMail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/; // Expresion regular de correo electronico
+
+    if(ERMail.test(inputCorreo.value) == false){
         bandera = false;
         let nuevaAlerta = document.createElement('p');
         nuevaAlerta.textContent = "Error. Mail no valido";
@@ -41,8 +43,9 @@ botonEnviar.addEventListener('click',(event) => {
     }
 
     if(bandera){
+        cuadroAlertas.innerHTML = "";
         console.log('Bandera true');
-        // Se envian los datos
+        envioDatos();
     }else{
         let nuevaAlerta = document.createElement('p');
         nuevaAlerta.textContent = "Error de validacion. No se enviaron los datos.";
@@ -60,8 +63,7 @@ function muestraAviso(mensaje,color){
 
 // Inciso 2 
 
-async function envioDatos(ev){
-    ev.preventDefault();
+async function envioDatos(){
     let formulario = document.getElementById('formulario');
     let datos = new FormData(formulario);
 
@@ -80,4 +82,3 @@ async function envioDatos(ev){
     }
 }
 
-*/
