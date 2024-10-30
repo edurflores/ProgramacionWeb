@@ -44,7 +44,6 @@ botonEnviar.addEventListener('click',(event) => {
 
     if(bandera){
         cuadroAlertas.innerHTML = "";
-        console.log('Bandera true');
         envioDatos();
     }else{
         let nuevaAlerta = document.createElement('p');
@@ -55,30 +54,35 @@ botonEnviar.addEventListener('click',(event) => {
 
 });
 
-function muestraAviso(mensaje,color){
-    alerta.textContent = mensaje;
-    alerta.style.color = color;
-}
-
-
 // Inciso 2 
 
 async function envioDatos(){
     let formulario = document.getElementById('formulario');
     let datos = new FormData(formulario);
-
     try{
         let respuesta = await fetch(formulario.action, {
-            method: formulario.method,
+            method: formulario.method, // metodo de envio: POST
             body: datos
-            });
+                })           
         if(respuesta.ok) {
-            let resultado = await response.json();
+            var resultado = await respuesta.json();
             console.log(resultado);
+            let nuevaAlerta = document.createElement('p');
+            nuevaAlerta.textContent = "Los datos se enviaron con exito. Resultado devuelto: " + resultado.id;
+            nuevaAlerta.style.color = "green";
+            cuadroAlertas.appendChild(nuevaAlerta);
+            }else{
+                let nuevaAlerta = document.createElement('p');
+                nuevaAlerta.textContent = "Los datos se enviaron pero ocurrio un error";
+                nuevaAlerta.style.color = "orange";
+                cuadroAlertas.appendChild(nuevaAlerta);
             }
         }
     finally{
-        muestraAviso("Los datos se enviaron exitosamente.","green");
+        let nuevaAlerta = document.createElement('p');
+        nuevaAlerta.textContent = "Gracias por usar este formulario.";
+        nuevaAlerta.style.color = "black";
+        cuadroAlertas.appendChild(nuevaAlerta);
     }
 }
 
