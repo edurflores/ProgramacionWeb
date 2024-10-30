@@ -1,13 +1,72 @@
-let botonEnviar = document.getElementById("botonEnviar");
-botonEnviar.addEventListener("click",envioDatos);
+let cuadroAlertas = document.getElementById('recuadroAlertas');
+let botonEnviar = document.getElementById('botonEnviar');
+botonEnviar.addEventListener('click',(event) => {
+    event.preventDefault();
+    bandera = true; // bandera que indica si el formulario es apto para enviarse. True: apto.
+    let inputUsuario = document.getElementById('inputUsuario');
+    let inputCorreo = document.getElementById('inputEmail');
+    let inputContra = document.getElementById('inputContrasena');
+    let inputRepContra = document.getElementById('inputRepContrasena');
+
+    if (inputUsuario.value == "Ana" || inputUsuario.value == "Pepe" || inputUsuario.value == "Pancho"){
+        bandera = false;
+        let nuevaAlerta = document.createElement('p');
+        nuevaAlerta.textContent = "Error. El usuario tiene nombre preexistente no valido.";
+        nuevaAlerta.style.color = "red";
+        cuadroAlertas.appendChild(nuevaAlerta);
+    }else{
+        bandera = true;
+        // nuevaAlerta.textContent = " ";
+    }
+
+    if(!(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(inputCorreo))){
+        bandera = false;
+        let nuevaAlerta = document.createElement('p');
+        nuevaAlerta.textContent = "Error. Mail no valido";
+        nuevaAlerta.style.color = "red";
+        cuadroAlertas.appendChild(nuevaAlerta);
+    }else{
+        bandera = true;
+        // nuevaAlerta.textContent = " ";
+    }
+
+    if(inputContra.value.length < 8){
+        bandera = false;
+        let nuevaAlerta = document.createElement('p');
+        nuevaAlerta.textContent = "Error. Contrasena debe tener longitud minima de 8 caracteres.";
+        nuevaAlerta.style.color = "red";
+        cuadroAlertas.appendChild(nuevaAlerta);
+    }else{
+        bandera = true;
+        // nuevaAlerta.textContent = " ";
+    }
+
+    if(inputRepContra.value != inputContra.value){
+        bandera = false;
+        let nuevaAlerta = document.createElement('p');
+        nuevaAlerta.textContent = "Error. La contrasena debe coincidir en ambos campos.";
+        nuevaAlerta.style.color = "red";
+        cuadroAlertas.appendChild(nuevaAlerta);
+    }else{
+        bandera = true;
+        // nuevaAlerta.textContent = " ";
+    }
+
+    if(bandera){
+        console.log('Bandera true');
+        // Se envian los datos
+    }
+
+});
 
 function muestraAviso(mensaje,color){
-    let alerta = document.getElementById("alerta");
     alerta.textContent = mensaje;
     alerta.style.color = color;
 }
 
 // Inciso 1
+
+/*
 
 function validacion(e){
     console.log('Entro a validacion');
@@ -77,3 +136,5 @@ async function envioDatos(ev){
         muestraAviso("Los datos se enviaron exitosamente.","green");
     }
 }
+
+*/

@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 640px;
+    width: 480px;
+    border: 2px solid red;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
