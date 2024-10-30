@@ -14,20 +14,14 @@ botonEnviar.addEventListener('click',(event) => {
         nuevaAlerta.textContent = "Error. El usuario tiene nombre preexistente no valido.";
         nuevaAlerta.style.color = "red";
         cuadroAlertas.appendChild(nuevaAlerta);
-    }else{
-        bandera = true;
-        // nuevaAlerta.textContent = " ";
     }
 
-    if(!(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(inputCorreo))){
+    if(!(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(inputCorreo.value))){
         bandera = false;
         let nuevaAlerta = document.createElement('p');
         nuevaAlerta.textContent = "Error. Mail no valido";
         nuevaAlerta.style.color = "red";
         cuadroAlertas.appendChild(nuevaAlerta);
-    }else{
-        bandera = true;
-        // nuevaAlerta.textContent = " ";
     }
 
     if(inputContra.value.length < 8){
@@ -36,9 +30,6 @@ botonEnviar.addEventListener('click',(event) => {
         nuevaAlerta.textContent = "Error. Contrasena debe tener longitud minima de 8 caracteres.";
         nuevaAlerta.style.color = "red";
         cuadroAlertas.appendChild(nuevaAlerta);
-    }else{
-        bandera = true;
-        // nuevaAlerta.textContent = " ";
     }
 
     if(inputRepContra.value != inputContra.value){
@@ -47,14 +38,16 @@ botonEnviar.addEventListener('click',(event) => {
         nuevaAlerta.textContent = "Error. La contrasena debe coincidir en ambos campos.";
         nuevaAlerta.style.color = "red";
         cuadroAlertas.appendChild(nuevaAlerta);
-    }else{
-        bandera = true;
-        // nuevaAlerta.textContent = " ";
     }
 
     if(bandera){
         console.log('Bandera true');
         // Se envian los datos
+    }else{
+        let nuevaAlerta = document.createElement('p');
+        nuevaAlerta.textContent = "Error de validacion. No se enviaron los datos.";
+        nuevaAlerta.style.color = "red";
+        cuadroAlertas.appendChild(nuevaAlerta);
     }
 
 });
@@ -64,56 +57,6 @@ function muestraAviso(mensaje,color){
     alerta.style.color = color;
 }
 
-// Inciso 1
-
-/*
-
-function validacion(e){
-    console.log('Entro a validacion');
-    e.preventDefault();
-
-    let bandera = true; // bandera logica que indica si las condiciones se cumplieron
-
-    alerta.textContent = '';
-
-    let valorUsuario = document.getElementById('inputUsuario').value;
-    
-    if(valorUsuario.length < 3){
-        muestraAviso("Error. El usuario debe tener longitud minima de 3 caracteres.");
-        bandera = false;
-    }
-
-    if(valorUsuario == 'Ana' || valorUsuario == 'Pepe' || valorUsuario == 'Pancho'){
-        muestraAviso("Error. El usuario tiene nombre preexistente no valido.");
-        bandera = False
-    }
-
-    let valorMail = document.getElementById('inputEmail').value;
-    if(!(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(valorMail))){
-        muestraAviso("Error. Mail no valido.");
-        bandera = false;
-    }
-
-    let valorContra = document.getElementById('inputContrasena').value;
-
-    if(valorContra.length < 8){
-        muestraAviso("Error. Contrasena debe tener longitud minima de 8 caracteres.");
-        bandera = false
-    }
-
-    let valorRepContra = document.getElementById('inputRepContrasena').value;
-
-    if(valorRepContra != valorContra){
-        muestraAviso("Error. La contrasena debe coincidir en ambos campos.")
-        bandera = false;
-    }
-
-    if(bandera == false){
-        return false;
-    }else{
-        envioDatos();
-    }
-}
 
 // Inciso 2 
 
