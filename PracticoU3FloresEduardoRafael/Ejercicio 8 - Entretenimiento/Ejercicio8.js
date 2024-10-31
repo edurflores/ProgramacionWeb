@@ -16,74 +16,74 @@ botonNuevaPartida.addEventListener("click",inicioJuego);
 let aviso = document.getElementById('aviso');
 
 let jugadorActivo = 1; // Primer turno es del jugador 1
+let resultados = [false,-1];
+
+let turnoJugador = document.createElement('p'); // Aviso de que jugador tiene su turno activo
 
 function poneEnBlanco(){
     arreCajas.forEach((caja) => {
-        console.log(caja.innerHTML);
-        caja.addEventListener("click",marcaCaja(caja));
-    })
+        caja.innerHTML = '';
+        caja.style.backgroundColor = "#eef8ff";
+    });
+}
+
+function preparaCajas() {
+    arreCajas.forEach((caja) => {
+        caja.addEventListener("click", function() {
+            if(this.innerHTML == ''){
+                if(jugadorActivo == 1){
+                    this.innerHTML = 'X';
+                    this.style.backgroundColor = "#87cefa";
+                    jugadorActivo = 2; // Actualiza jugador activo
+                    resultados = compruebaFinalJuego();
+                    turnoJugador.textContent = 'Turno del jugador ' + jugadorActivo;
+                    if(jugadorActivo == 1){
+                        turnoJugador.style.color = 'blue';
+                        aviso.appendChild(turnoJugador);
+                    }else{
+                        aviso.style.color = 'red';
+                        turnoJugador.style.color = 'red';
+                        aviso.appendChild(turnoJugador);
+                    }
+                }else{
+                    this.innerHTML = 'O';
+                    this.style.backgroundColor = "#ffb6c1";
+                    jugadorActivo = 1;
+                    resultados = compruebaFinalJuego();
+                    aviso.innerHTML = 'Turno del jugador ' + jugadorActivo;
+                    if(jugadorActivo == 1){
+                        aviso.style.color = 'blue';
+                    }else{
+                        aviso.style.color = 'red';
+                    }
+                }
+            }else{
+                console.log(this.innerHTML);
+                aviso.textContent = 'Error. Seleccione caja que se encuentre disponible';
+                aviso.style.color = "black";
+            }
+            if(resultados[0]){ // True: termino el juego
+                aviso.innerHTML = '';
+                aviso.innerHTML = 'Juego finalizado. Ganador: ' + resultados[1];
+                aviso.style.color = 'green';
+            }
+        });
+    });
 }
 
 function inicioJuego(){
     poneEnBlanco();
     aviso.innerHTML = 'Nueva partida iniciada.';
     aviso.style.color = 'green';
-    
-    let resultados = [false,-1];
-    
-    while(resultados[0] == false){
-        intento();
-        if(jugadorActivo == 1){
-            marcaCaja();
-            jugadorActivo == 2;
-        }else{
-            marcaCaja();
-            jugadorActivo == 1;
-        }
-        resultados = compruebaFinalJuego();
-    }
-    if(resultados[0]){ // True: termino el juego
-        aviso.innerHTML = 'Juego finalizado. Ganador: ' + resultados[1];
-        aviso.style.color = 'green';
-    }
-}
-
-function marcaCaja(xcaja){ // Retorna true si el jugador marco una caja, false si no lo hizo
-    // Comprobar si la caja no esta marcada de antemano
-    let bandera = false;
-    arreCajas.forEach((caja) => {
-        while(bandera == false){
-            if(caja.innerHTML == 'X' || caja.innerHTML == 'O'){ // La caja ya esta marcada
-                bandera = false;
-                aviso.innerHTML = 'La caja ya esta marcada. Reintente con otra.';
-                aviso.style.color = "violet";
-            }else{ // La caja no esta marcada
-                if(nroJugador == 1){
-                    xcaja.innerHTML = 'X';
-                    xcaja.removeEventListener("click",marcaCaja);
-                    aviso.innerHTML = '';
-                    bandera = true;
-                }else{
-                    xcaja.innerHTML = 'O';
-                    xcaja.removeEventListener("click",marcaCaja);
-                    aviso.innerHTML = '';
-                    bandera = true;
-                }
-            }
-        }
-        
-    })
-    return bandera;
-}
-
-function intento(){
-    aviso.innerHTML = 'Turno del jugador ' + jugadorActivo;
+    preparaCajas();
+    turnoJugador.textContent = 'Turno del jugador ' + jugadorActivo;
     if(jugadorActivo == 1){
-        aviso.style.color = 'blue';
+        turnoJugador.style.color = 'blue';
+        aviso.appendChild(turnoJugador);
     }else{
-        aviso.style.color = 'red';
-    }
-
+        turnoJugador.style.color = 'red';
+        aviso.appendChild(turnoJugador);
+        }
 }
 
 function compruebaFinalJuego(){

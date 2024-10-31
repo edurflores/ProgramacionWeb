@@ -20,11 +20,13 @@ body{
 .cuadroJug1 {
     border: 2px solid blue;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .cuadroJug2 {
     border: 2px solid red;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .tablero {
@@ -69,3 +71,7 @@ body{
     font-size: 32px;
 }
 
+.caja:hover {
+    background-color: gainsboro;
+
+}
